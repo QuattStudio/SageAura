@@ -1,0 +1,102 @@
+/*
+    SA Engine
+
+    Copyright (c) 2026 DBQ Studio
+
+    This file is part of the SA Engine project.
+    Licensed under the MIT License.
+
+    See the LICENSE file in the project root for full license information.
+*/
+
+#pragma once
+
+
+
+#include "sa_core.h"
+#include "sa_types.h"
+
+#include "sa_platforms.h"
+
+
+
+
+
+
+#define SA_MAX_TRIANGLES    0x1388  // 5k
+#define SA_MAX_INDICES      0x7530  // 30k  
+#define SA_MAX_VERTICES     (SA_MAX_TRIANGLES * 3)
+
+
+
+extern SA_Vertex sa_vertex_I[SA_MAX_VERTICES];
+extern SA_Uint   sa_index_I[SA_MAX_INDICES];
+
+extern SA_Mesh* GlobalMesh;
+
+
+
+
+
+typedef struct SA_Texture {
+    SA_Uint id;
+    int width, height;
+} SA_Texture;
+
+
+
+extern SA_Texture* SA_WhiteTexture;   // global white texture for colored draws
+
+
+
+
+// SA_API
+int SA_InitRenderer_I(void);
+
+
+SA_API
+void SA_PushIndex(SA_Uint idx);
+
+
+// Simple vertex push (you can use this directly)
+SA_API
+void SA_PushVertex(float x, float y, float r, float g, float b, float a);
+
+
+SA_API
+void SA_PushVertexUV(float x, float y, float r, float g, float b, float a, float u, float v);
+
+
+SA_API SA_Texture* SA_LoadTexture(const char* filepath);
+
+
+
+// u0,v0 = top-left texcoord, u1,v1 = bottom-right texcoord
+SA_API void SA_DrawTexture(SA_Texture* tex, int x, int y, int w, int h);
+SA_API void SA_UnLoadTexture(SA_Texture* texture);
+
+
+
+SA_API
+void SA_DrawTriangle(
+    int x1, int y1, SA_Color color1,
+    int x2, int y2, SA_Color color2,
+    int x3, int y3, SA_Color color3);
+
+
+
+
+SA_API
+void SA_DrawRect(int x, int y, int w, int h, SA_Color color);
+
+
+
+
+SA_API
+void SA_SetProjectionOrtho(float left, float right, float bottom, float top);
+
+
+
+
+SA_API
+void SA_FlushBatch(void);
