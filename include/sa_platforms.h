@@ -18,6 +18,7 @@
 
 /* Windows */
 #if defined(_WIN32) || defined(__CYGWIN__)
+// #   include <windows.h>
     #ifdef SA_BUILD        /* defined when building the DLL */
         #define SA_API __declspec(dllexport)
     #else
@@ -34,3 +35,22 @@
 #endif
 
 #endif /* SA_STATIC */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

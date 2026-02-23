@@ -82,12 +82,12 @@ typedef enum {
 
     int r, g, b, a;
 */
-typedef struct SA_Color {
+typedef struct SA_Colori {
     int r;
     int g;
     int b;
     int a;
-} SA_Color;
+} SA_Colori;
 
 
 
@@ -99,12 +99,12 @@ typedef struct SA_Color {
 
     float r, g, b, a;
 */
-typedef struct SA_ColorF {
+typedef struct SA_Color {
     float r;
     float g;
     float b;
     float a;
-} SA_ColorF;
+} SA_Color;
 
 
 
@@ -121,13 +121,13 @@ typedef struct SA_ColorF {
 
     int r, g, b, a;
 */
-typedef struct SA_Rect 
+typedef struct SA_Recti 
 {
     int x;
     int y;
     int width;
     int height;
-} SA_Rect;
+} SA_Recti;
 
 
 
@@ -135,18 +135,18 @@ typedef struct SA_Rect
 
 
 /*
-    SageAura RectF is a float struct
+    SageAura Rect is a float struct
     contains:
 
     float r, g, b, a;
 */
-typedef struct SA_RectF 
+typedef struct SA_Rect 
 {
     float x;
     float y;
     float width;
     float height;
-} SA_RectF;
+} SA_Rect;
 
 
 
@@ -164,6 +164,10 @@ typedef struct SA_Vec2 {
 } SA_Vec2;
 
 
+typedef struct SA_Vec2i {
+    int x;
+    int y;
+} SA_Vec2i;
 
 
 

@@ -299,4 +299,4 @@ SA_API double SA_GetMouseWheel(void);        // last scroll delta this frame
 
 typedef void (*SA_EventCallback)(SA_Window* window, const SA_Event* event);
 
-SA_API void SA_SetEventCallback(SA_EventCallback callback);
+SA_API void SA_RunEventCallback(SA_EventCallback callback);

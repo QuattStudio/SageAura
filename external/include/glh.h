@@ -1,12 +1,25 @@
+/*
+    SA Engine
+
+    Copyright (c) 2026 DBQ Studio
+
+    This file is part of the SA Engine project.
+    Licensed under the MIT License.
+
+    See the LICENSE file in the project root for full license information.
+*/
+
+
+
+
 #ifndef GLH_H
 #define GLH_H
 
 
 
-
-
-#include "GLFW/glfw3.h"
+#define GLFW_INCLUDE_NONE
 #include "glad/glad.h"
+#include "GLFW/glfw3.h"
 
 
 
@@ -253,7 +266,7 @@ void GLH_SetupTex2D(unsigned int *tex, int total)
     glDeleteProgram(program)
 
 
-
+#define SA_OFFSET(obj)  ((void*)(obj))
 
 
 

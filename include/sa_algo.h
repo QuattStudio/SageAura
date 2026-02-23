@@ -18,12 +18,11 @@
 
 
 #include "sa_types.h"
-#include "sa_common.h"
 
 
 
 #define SA_ALGO_API_I    static inline
-
+#define SA_ALGO_MAX_OPACITY_I     (255)
 
 
 
@@ -38,13 +37,13 @@
 
 
 SA_ALGO_API_I
-SA_ColorF SA_NormalizeColor(int r, int g, int b)
+SA_Color SA_NormalizeColor(SA_Colori color)
 {
-    SA_ColorF colorf;
+    SA_Color colorf;
 
-    colorf.r = SA_Normalize_I(r, SA_COLOR_MAX_OPACITY);
-    colorf.g = SA_Normalize_I(g, SA_COLOR_MAX_OPACITY);
-    colorf.b = SA_Normalize_I(b, SA_COLOR_MAX_OPACITY);
+    colorf.r = SA_Normalize_I(color.r, SA_ALGO_MAX_OPACITY_I);
+    colorf.g = SA_Normalize_I(color.g, SA_ALGO_MAX_OPACITY_I);
+    colorf.b = SA_Normalize_I(color.b, SA_ALGO_MAX_OPACITY_I);
     colorf.a = 1.0f;
 
     return colorf;
@@ -55,14 +54,14 @@ SA_ColorF SA_NormalizeColor(int r, int g, int b)
 
 
 SA_ALGO_API_I
-SA_ColorF SA_NormalizeColorEx(int r, int g, int b, int a)
+SA_Color SA_NormalizeColorEx(SA_Colori color)
 {
-    SA_ColorF colorf;
+    SA_Color colorf;
 
-    colorf.r = SA_Normalize_I(r, SA_COLOR_MAX_OPACITY);
-    colorf.g = SA_Normalize_I(g, SA_COLOR_MAX_OPACITY);
-    colorf.b = SA_Normalize_I(b, SA_COLOR_MAX_OPACITY);
-    colorf.a = SA_Normalize_I(a, SA_COLOR_MAX_OPACITY);
+    colorf.r = SA_Normalize_I(color.r, SA_ALGO_MAX_OPACITY_I);
+    colorf.g = SA_Normalize_I(color.g, SA_ALGO_MAX_OPACITY_I);
+    colorf.b = SA_Normalize_I(color.b, SA_ALGO_MAX_OPACITY_I);
+    colorf.a = SA_Normalize_I(color.a, SA_ALGO_MAX_OPACITY_I);
 
 
     return colorf;

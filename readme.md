@@ -18,8 +18,19 @@ A lightweight game engine written in C with OpenGL 3.3 Core Profile.
 ### v0.1.0
 - Initial release with core systems
 
+### v0.2.3
+- Provides Text rendering.
+- Much amount of code improvement like splitting image, text handling part into files.
+- math module added
+
+
+
 ## Building
 (coming soon)
 
 ## License
 MIT
+
+
+## Repository
+[GitHub - QuattStudio/SageAura](https://github.com/QuattStudio/SageAura)

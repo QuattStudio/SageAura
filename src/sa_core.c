@@ -10,6 +10,7 @@
 */
 
 #include "sa_core.h"
+#include "glh.h"
 
 
 
@@ -66,13 +67,38 @@ SA_Mesh* SA_CreateMesh_I(SA_Uint VAO, SA_Uint VBO, SA_Uint EBO)
 
 
 
+void SA_MeshCounterReset_I(SA_Mesh* mesh)
+{
+    if (SA_NOT mesh) {
+        SA_LOG_WARN("Nothing provided to reset in mesh counter reset function!");
+        return;
+    }
+
+    mesh->VertexCount = 0;
+    mesh->IndexCount = 0;
+}
+
+
+
 
 
 void SA_DestroyMesh_I(SA_Mesh* mesh)
 {
-    if (!mesh) return;
+    if (SA_NOT mesh) {
+        SA_LOG_WARN("No mesh provided for destruction!");
+        return;
+    }
+
+
+    GLH_DelVAO(&mesh->VAO, 1);
+    GLH_DelBuffers(&mesh->VBO, 1);
+    GLH_DelBuffers(&mesh->EBO, 1);
+
+    SA_LOG_INFO("Mesh Destroyed succesfully!");
 
     free(mesh);
+
+    mesh = NULL;
 }
 
 

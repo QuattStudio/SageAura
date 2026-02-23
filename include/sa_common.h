@@ -88,6 +88,7 @@
 
 
 
+
 #define SA_MALLOC(type) ((type*)malloc(sizeof(type)))
 #define SA_MALLOC_N(type, n) ((type*)malloc(sizeof(type * n)))
 
@@ -103,7 +104,7 @@
 
 /* colors */
 
-#define SA_RGBA(r, g, b, a)     ((SA_Color){(r), (g), (b), (a)})
+#define SA_RGBA(r, g, b, a)     ((SA_Colori){(r), (g), (b), (a)})
 #define SA_RGB(r, g, b)     SA_RGBA((r), (g), (b), SA_COLOR_MAX_OPACITY)
 
 

@@ -23,6 +23,7 @@
 
 
 
+
 #define SA_MAX_TRIANGLES    0x1388  // 5k
 #define SA_MAX_INDICES      0x7530  // 30k  
 #define SA_MAX_VERTICES     (SA_MAX_TRIANGLES * 3)
@@ -33,6 +34,8 @@ extern SA_Vertex sa_vertex_I[SA_MAX_VERTICES];
 extern SA_Uint   sa_index_I[SA_MAX_INDICES];
 
 extern SA_Mesh* GlobalMesh;
+extern SA_Uint CurrentBoundTexture;
+
 
 
 
@@ -60,34 +63,25 @@ void SA_PushIndex(SA_Uint idx);
 
 // Simple vertex push (you can use this directly)
 SA_API
-void SA_PushVertex(float x, float y, float r, float g, float b, float a);
+void SA_PushVertex(float x, float y, SA_Color color);
 
 
 SA_API
-void SA_PushVertexUV(float x, float y, float r, float g, float b, float a, float u, float v);
-
-
-SA_API SA_Texture* SA_LoadTexture(const char* filepath);
-
-
-
-// u0,v0 = top-left texcoord, u1,v1 = bottom-right texcoord
-SA_API void SA_DrawTexture(SA_Texture* tex, int x, int y, int w, int h);
-SA_API void SA_UnLoadTexture(SA_Texture* texture);
+void SA_PushVertexUV(float x, float y, SA_Color color, float u, float v);
 
 
 
 SA_API
 void SA_DrawTriangle(
-    int x1, int y1, SA_Color color1,
-    int x2, int y2, SA_Color color2,
-    int x3, int y3, SA_Color color3);
+    int x1, int y1, SA_Colori color1,
+    int x2, int y2, SA_Colori color2,
+    int x3, int y3, SA_Colori color3);
 
 
 
 
 SA_API
-void SA_DrawRect(int x, int y, int w, int h, SA_Color color);
+void SA_DrawRect(int x, int y, int w, int h, SA_Colori color);
 
 
 

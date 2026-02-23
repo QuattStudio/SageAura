@@ -38,10 +38,15 @@ int main(int argc, char **argv)
 
     SA_Rect rect = {50, 100, 50, 50};
 
+    SA_Font* font =  SA_CreateFont("FORTE.TTF", 32.0f);   // change path if needed
+    SA_Font* font2 = SA_CreateFont("BAUHS93.TTF", 32.0f);   // change path if needed
+
+
+
 
     while (SA_Play())
     {
-        SA_SetEventCallback(MyEventHandler);
+        SA_RunEventCallback(MyEventHandler);
         
 
         if (SA_IsKeyPressed(SA_KEY_A))      // pressed this exact frame
@@ -51,10 +56,20 @@ int main(int argc, char **argv)
 
         SA_DrawTexture(tex, rect.x, rect.y, rect.width, rect.height);
 
+            // In render loop:
+        SA_DrawText(font, "Hello SageAura! Text works now :)", 50.0f, 50.0f, SA_RED);
+        SA_DrawText(font2, "This is SageAura! Text works now :)", 50.0f, 250.0f, SA_GREEN);
+
 
 
         SA_EndFrame();
     }
+// 
+        // At shutdown:
+    SA_UnLoadFont(font);
+    SA_UnLoadFont(font2);
+
+
 
     SA_UnLoadTexture(tex);
 

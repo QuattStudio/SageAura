@@ -279,7 +279,7 @@ void SA_SetWindowEventCallBacks_I(SA_Window* window)
 
 
 
-void SA_SetEventCallback(SA_EventCallback callback)
+void SA_RunEventCallback(SA_EventCallback callback)
 {
     SA_Event event;
     if (SA_NOT SA_WindowInst_I) return;

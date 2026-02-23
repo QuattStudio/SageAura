@@ -19,8 +19,6 @@
 #include "sa_platforms.h"
 
 
-
-
 typedef struct SA_Mesh SA_Mesh;
 typedef struct SA_Vertex SA_Vertex;
 
@@ -30,7 +28,7 @@ SA_API void SA_Delay(int ms);
 SA_Mesh* SA_CreateMesh_I(SA_Uint VAO, SA_Uint VBO, SA_Uint EBO);
 void SA_DestroyMesh_I(SA_Mesh* mesh);
 
-
+void SA_MeshCounterReset_I(SA_Mesh* mesh);
 
 
 
@@ -57,6 +55,7 @@ typedef struct SA_Vertex {
     float r, g, b, a;
     float u, v;
 } SA_Vertex;
+
 
 
 

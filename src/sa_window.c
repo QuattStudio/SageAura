@@ -11,7 +11,6 @@
 
 #include "sa_window.h"
 #include "sa_common.h"
-#include "sa_algo.h"
 #include "sa_core.h"
 
 #include "sa_renderer.h"
@@ -170,32 +169,20 @@ int SA_Play(void)
 
 void SA_CloseWindow(void)
 {
-    if (SA_NOT SA_WindowInst_I) {
-        SA_LOGV_INFO("No SageAura window provided!");
-        return;    
-    }
+    SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);  
 
 
-    if (SA_NOT SA_WindowInst_I) {
-        SA_LOGV_INFO("No SageAura Window provided!");
-        return;
-    }
-
-    
-    GLH_DelVAO(&GlobalMesh->VAO, 1);
-    GLH_DelBuffers(&GlobalMesh->VBO, 1);
-    GLH_DelBuffers(&GlobalMesh->EBO, 1);
-
+    SA_DestroyMesh_I(GlobalMesh);
 
 
     glfwDestroyWindow(SA_WindowInst_I->handle);
 
     SA_LOGV_INFO("GLFW window Destroyed!");
 
-    free(GlobalMesh);
 
     free(SA_WindowInst_I);
     SA_WindowInst_I = NULL;
+    SA_IsControlFlagEnabled = 0; // close the flag
 
     glfwTerminate();
 
@@ -215,8 +202,7 @@ void SA_CloseWindow(void)
 
 void SA_BeginFrame(void)
 {
-    GlobalMesh->VertexCount = 0;
-    GlobalMesh->IndexCount  = 0;
+    SA_MeshCounterReset_I(GlobalMesh);
     SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
     GLH_ClearColor(
         SA_WindowInst_I->color.r,
@@ -235,8 +221,8 @@ void SA_EndFrame(void)
 
     glfwSwapBuffers(SA_WindowInst_I->handle);
 
-    GlobalMesh->IndexCount  = 0;
-    GlobalMesh->VertexCount = 0;
+    
+    SA_MeshCounterReset_I(GlobalMesh);
 
     SA_Delay(16);
 }

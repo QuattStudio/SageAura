@@ -21,3 +21,7 @@
 #include "sa_renderer.h"
 #include "sa_event.h"
 
+#include "sa_text.h"
+#include "sa_image.h"
+
+#include "sa_math.h"

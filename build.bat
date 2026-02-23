@@ -29,4 +29,4 @@ if %errorlevel% neq 0 (
 echo.
 echo Build SUCCESS ✅
 echo SageAura.dll created! (no glfw3.dll needed at runtime)
-pause
+REM pause

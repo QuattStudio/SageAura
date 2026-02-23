@@ -37,6 +37,13 @@ const char* SA_VertexShaderSrc_I =
 "    TexCoord = aTexCoord;\n"
 "}\n";
 
+
+
+
+
+
+
+
 const char* SA_FragmentShaderSrc_I =
 "#version 330 core\n"
 "in vec4 vertexColor;\n"
@@ -47,4 +54,5 @@ const char* SA_FragmentShaderSrc_I =
 "void main()\n"
 "{\n"
 "    vec4 tex = texture(uTexture, TexCoord);\n"
-"    FragColor = tex * vertexColor; // multiply texture by vertex color (tint)\n}\n";
+"    FragColor = tex * vertexColor;   // original working version\n"
+"}\n";

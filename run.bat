@@ -30,10 +30,10 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo ✅ Build Success
+echo Build Success
 echo Running...
 echo.
 
 test_game.exe
 
-pause
+REM pause
