@@ -28,6 +28,9 @@
 
 #include "glh.h"
 
+#include <math.h>
+
+
 
 // Include End //
 
@@ -372,16 +375,51 @@ void SA_FlushBatch(void)
 
 
 
+#include <math.h>   // sqrtf, fabsf if needed
 
+void SA_DrawPoint(int x, int y, SA_Colori color) {
+    // Option A: two small triangles = perfect 1×1 pixel coverage
+    SA_DrawTriangle(x,   y,   color,
+                    x+1, y,   color,
+                    x,   y+1, color);
 
+    SA_DrawTriangle(x+1, y,   color,
+                    x+1, y+1, color,
+                    x,   y+1, color);
 
+}
 
+void SA_DrawLine(int x0, int y0, int x1, int y1, SA_Colori color) {
+    float dx = (float)(x1 - x0);
+    float dy = (float)(y1 - y0);
+    float len = sqrtf(dx*dx + dy*dy);
 
+    if (len < 0.5f) {
+        SA_DrawPoint(x0, y0, color);
+        return;
+    }
 
+    float nx = dx / len;
+    float ny = dy / len;
 
+    // Perpendicular offset, half thickness = 1.0 px
+    float px = -ny * 1.0f;
+    float py =  nx * 1.0f;
 
+    // Four corners with rounded offset
+    int xA = x0 + (int)( px + 0.5f);
+    int yA = y0 + (int)( py + 0.5f);
+    int xB = x1 + (int)( px + 0.5f);
+    int yB = y1 + (int)( py + 0.5f);
+    int xC = x0 - (int)( px + 0.5f);
+    int yC = y0 - (int)( py + 0.5f);
+    int xD = x1 - (int)( px + 0.5f);
+    int yD = y1 - (int)( py + 0.5f);
 
-
+    // Two triangles forming the thin quad (counter-clockwise winding)
+    SA_DrawTriangle(xA, yA, color, xB, yB, color, xC, yC, color);
+    SA_DrawTriangle(xB, yB, color, xD, yD, color, xC, yC, color);
+}
 
 
 

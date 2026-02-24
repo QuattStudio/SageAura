@@ -57,8 +57,9 @@ int main(int argc, char **argv)
         SA_DrawTexture(tex, rect.x, rect.y, rect.width, rect.height);
 
             // In render loop:
-        SA_DrawText(font, "Hello SageAura! Text works now :)", 50.0f, 50.0f, SA_RED);
         SA_DrawText(font2, "This is SageAura! Text works now :)", 50.0f, 250.0f, SA_GREEN);
+
+        SA_DrawLine(10, 10, 100, 150, SA_ColorFromHex("#0055FFFF"));
 
 
 

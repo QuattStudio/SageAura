@@ -94,3 +94,16 @@ void SA_SetProjectionOrtho(float left, float right, float bottom, float top);
 
 SA_API
 void SA_FlushBatch(void);
+
+
+
+
+
+
+SA_API
+void SA_DrawPoint(int x, int y, SA_Colori color);
+
+
+
+SA_API
+void SA_DrawLine(int x0, int y0, int x1, int y1, SA_Colori color);
