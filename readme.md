@@ -23,9 +23,10 @@ A lightweight game engine written in C with OpenGL 3.3 Core Profile.
 - Much amount of code improvement like splitting image, text handling part into files.
 - math module added
 
-### v0.3.0
+### v0.3.1
 - Added Line and Point rendering
 - about 33 more colors added
+- some minor changes
 
 
 ## Building
