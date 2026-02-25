@@ -33,6 +33,7 @@ void SA_MeshCounterReset_I(SA_Mesh* mesh);
 
 
 
+void SA_ApplyGLFWWindowHint_I(SA_Uint flags);
 
 
 
@@ -55,6 +56,30 @@ typedef struct SA_Vertex {
     float r, g, b, a;
     float u, v;
 } SA_Vertex;
+
+
+
+
+
+
+
+
+typedef enum {
+    SA_FLAG_NONE = 0,
+    SA_FLAG_WINDOW_MAXIMIZED = (1 << 0),
+    SA_FLAG_WINDOW_FULLSCREEN = (1 << 1),
+    SA_FLAG_WINDOW_BORDERLESS = (1 << 2),
+    SA_FLAG_WINDOW_RESIZABLE = (1 << 3),
+
+    SA_FLAG_ENABLE_CONTROL = (1 << 4),
+    // SA_FLAG_WINDOW_M = (0 << 1),
+} SA_InitFlags_I;
+
+
+
+
+
+
 
 
 

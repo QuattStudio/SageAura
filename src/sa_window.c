@@ -12,10 +12,14 @@
 #include "sa_window.h"
 #include "sa_common.h"
 #include "sa_core.h"
+#include "sa_text.h"
 
 #include "sa_renderer.h"
 #include "sa_event.h"
+#include "sa_audio.h"
 #include "sa_inc.h"
+
+#include "sa_algo.h" 
 
 
 // internals
@@ -40,7 +44,7 @@ SA_Window *SA_WindowInst_I = NULL;
 
 /* internal flags */
 
-int SA_IsControlFlagEnabled = 0;
+int SA_IsControlFlagEnabled_I = 0;
 
 
 
@@ -60,8 +64,11 @@ int SA_IsControlFlagEnabled = 0;
 
 int SA_Start(int flags)
 {
-    if (flags & SA_FLAG_TYPE_CONTROL_I)
-        SA_IsControlFlagEnabled = 1;
+    if (flags & SA_FLAG_ENABLE_CONTROL)
+        SA_IsControlFlagEnabled_I = 1;
+    
+
+
 
     /* Init GLFW */
     int GLFWInitErrState = glfwInit();
@@ -78,6 +85,8 @@ int SA_Start(int flags)
     /* Setup Gl version */
     GLH_UseGL330Version();
     SA_LOGV_INFO("GL Version : %d", SA_GL_VERSION_USED);
+
+    SA_OpenAudioEngine_I();
 
 
     SA_LOG_INFO("SageAura Initialization completed!");
@@ -182,7 +191,20 @@ void SA_CloseWindow(void)
 
     free(SA_WindowInst_I);
     SA_WindowInst_I = NULL;
-    SA_IsControlFlagEnabled = 0; // close the flag
+
+    // clear the default font
+
+    if (SA_DefaultFont_I) {
+        SA_UnLoadFont(SA_DefaultFont_I);
+        SA_DefaultFont_I = NULL;        
+        SA_LOG_INFO("Default Font unloaded successfully!");
+    }
+
+
+    SA_CloseAudioEngine_I();
+
+
+    SA_IsControlFlagEnabled_I = 0; // close the flag
 
     glfwTerminate();
 
@@ -200,7 +222,7 @@ void SA_CloseWindow(void)
 
 
 
-void SA_BeginFrame(void)
+void SA_BeginDrawing(void)
 {
     SA_MeshCounterReset_I(GlobalMesh);
     SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
@@ -213,7 +235,7 @@ void SA_BeginFrame(void)
 
 
 
-void SA_EndFrame(void)
+void SA_EndDrawing(void)
 {
     SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
 
@@ -224,5 +246,36 @@ void SA_EndFrame(void)
     
     SA_MeshCounterReset_I(GlobalMesh);
 
-    SA_Delay(16);
+    SA_Delay((int)(1000.0 / SA_WindowInst_I->fps));
+}
+
+
+
+
+
+
+
+
+
+void SA_SetBackgroundColor(SA_Colori color)
+{
+    SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
+    SA_Color fcolor;
+    fcolor = SA_NormalizeColorEx(color);
+
+    SA_WindowInst_I->color.r = fcolor.r;
+    SA_WindowInst_I->color.g = fcolor.g;
+    SA_WindowInst_I->color.b = fcolor.b;
+
+    SA_LOG_INFO("new background color applied successfully! where Color: (R: %f; G: %f; B: %f)", 
+        fcolor.r, fcolor.g, fcolor.b);
+}
+
+
+
+void SA_SetTargetFPS(int fps)
+{
+    SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
+    
+    SA_WindowInst_I->fps = fps;
 }

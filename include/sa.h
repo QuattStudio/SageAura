@@ -23,5 +23,6 @@
 
 #include "sa_text.h"
 #include "sa_image.h"
+#include "sa_audio.h"
 
 #include "sa_math.h"

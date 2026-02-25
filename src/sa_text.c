@@ -36,6 +36,7 @@ typedef struct SA_Font {
 
 
 
+SA_Font *SA_DefaultFont_I = NULL;
 
 
 
@@ -52,7 +53,9 @@ typedef struct SA_Font {
 
 
 
-SA_Font* SA_CreateFont(const char* ttf_path, float pixel_size)
+
+
+SA_Font* SA_LoadFont(const char* ttf_path, float pixel_size)
 {
     SA_Font* f = calloc(1, sizeof(SA_Font));
     
@@ -141,6 +144,15 @@ SA_Font* SA_CreateFont(const char* ttf_path, float pixel_size)
 
 
 
+void SA_SetDefaultFont(SA_Font* font)
+{
+    if (SA_NOT font) {
+        SA_LOG_WARN("No Font provided for default!");
+        return;
+    }
+
+    SA_DefaultFont_I = font;
+}
 
 
 
@@ -151,7 +163,71 @@ SA_Font* SA_CreateFont(const char* ttf_path, float pixel_size)
 
 
 
-void SA_DrawText(SA_Font* font, const char* str, float x, float y, SA_Colori color)
+
+
+
+
+void SA_DrawText(const char* str, float x, float y, SA_Colori color)
+{
+    SA_Font* font = SA_DefaultFont_I;
+
+    if (!font || !str || !*str) return;
+
+    if (CurrentBoundTexture != font->texID) {
+        SA_FlushBatch();
+        GlobalMesh->VertexCount = 0;
+        GlobalMesh->IndexCount  = 0;
+        CurrentBoundTexture = font->texID;
+    }
+
+
+
+    float cx = x;
+    float cy = y + font->ascent;
+
+    SA_Color fc = SA_NormalizeColorEx(color);
+
+    while (*str) {
+        int ch = (unsigned char)*str++;
+        if (ch < 32 || ch > 126) {
+            if (ch == ' ') cx += font->size * 0.45f;
+            continue;
+        }
+
+        stbtt_aligned_quad q;
+        stbtt_GetPackedQuad(font->chardata, font->atlasW, font->atlasH,
+                            ch, &cx, &cy, &q, 1);   // 1 = use align (baseline)
+
+        // Push quad (using your existing helpers)
+        size_t base = GlobalMesh->VertexCount;
+
+        SA_PushVertexUV(q.x0, q.y0, fc, q.s0, q.t0);
+        SA_PushVertexUV(q.x1, q.y0, fc, q.s1, q.t0);
+        SA_PushVertexUV(q.x0, q.y1, fc, q.s0, q.t1);
+        SA_PushVertexUV(q.x1, q.y1, fc, q.s1, q.t1);
+
+        SA_PushIndex(base+0); SA_PushIndex(base+1); SA_PushIndex(base+2);
+        SA_PushIndex(base+1); SA_PushIndex(base+3); SA_PushIndex(base+2);
+
+        if (GlobalMesh->VertexCount >= SA_MAX_VERTICES - 4) {
+            SA_FlushBatch();
+            GlobalMesh->VertexCount = 0;
+            GlobalMesh->IndexCount  = 0;
+        }
+    }
+
+    SA_FlushBatch();  // force draw text this frame
+}
+
+
+
+
+
+
+
+
+
+void SA_DrawTextEx(SA_Font* font, const char* str, float x, float y, SA_Colori color)
 {
     if (!font || !str || !*str) return;
 

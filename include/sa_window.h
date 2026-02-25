@@ -32,7 +32,13 @@ typedef struct SA_Window SA_Window;
 
 
 
-extern int SA_IsControlFlagEnabled;
+extern int SA_IsControlFlagEnabled_I;
+
+
+
+
+
+
 
 
 SA_API
@@ -53,15 +59,19 @@ int SA_Play(void);
 
 
 SA_API
-void SA_BeginFrame(void);
+void SA_BeginDrawing(void);
 
 
 
 SA_API
-void SA_EndFrame(void);
+void SA_EndDrawing(void);
 
 
+SA_API
+void SA_SetBackgroundColor(SA_Colori color);
 
+SA_API
+void SA_SetTargetFPS(int fps);
 
 
 
@@ -71,7 +81,7 @@ void SA_EndFrame(void);
 /* Macros for task simplifications */
 
 #define SA_CheckIsControlFlagEnabled_I(retType)\
-    if (SA_IsControlFlagEnabled)\
+    if (SA_IsControlFlagEnabled_I)\
         return retType;\
     else exit(1)
 

@@ -11,6 +11,7 @@
 
 #include "sa_core.h"
 #include "glh.h"
+#include "sa_inc.h"
 
 
 
@@ -103,3 +104,35 @@ void SA_DestroyMesh_I(SA_Mesh* mesh)
 
 
 
+
+
+
+
+
+
+
+
+
+void SA_ApplyGLFWWindowHint_I(SA_Uint flags)
+{
+    if (flags & SA_FLAG_WINDOW_RESIZABLE) {
+        SA_LOG_INFO("Flag type [window resizable] setted on window!");
+        glfwWindowHint(GLFW_RESIZABLE, SA_YES);
+    }
+
+    if (flags & SA_FLAG_WINDOW_BORDERLESS) {
+        SA_LOG_INFO("Flag type [window border-less] setted on window!");
+        glfwWindowHint(GLFW_DECORATED, SA_NO);
+    }
+
+    if (flags & SA_FLAG_WINDOW_MAXIMIZED) {
+        SA_LOG_INFO("Flag type [window maximized] setted on window!");
+        glfwWindowHint(GLFW_MAXIMIZED, SA_NO);
+    }
+
+    if (flags & SA_FLAG_WINDOW_FULLSCREEN) {
+        SA_LOG_INFO("Flag type [window fullscreen] setted on window!");
+        // glfwWindowHint(GLFW_FULL, SA_NO);
+    }
+    
+}

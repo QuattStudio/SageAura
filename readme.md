@@ -1,7 +1,7 @@
 # SageAura
 A lightweight game engine written in C with OpenGL 3.3 Core Profile.
 
-> ⚠️ Currently in early development (v0.3.0)
+> ⚠️ Currently in early development (v0.4.0)
 
 ## Features
 - Simple texture loading
@@ -27,6 +27,11 @@ A lightweight game engine written in C with OpenGL 3.3 Core Profile.
 - Added Line and Point rendering
 - about 33 more colors added
 - some minor changes
+
+## v0.4.0
+- Audio system added
+- some more function added for game to control FPS and Background color
+
 
 
 ## Building

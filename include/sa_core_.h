@@ -25,8 +25,3 @@ typedef enum SA_STATE_I {
 
 
 
-
-typedef enum SA_INIT_FLAGS_I {
-    SA_FLAG_TYPE_CONTROL_I
-} SA_INIT_FLAGS_I;
-

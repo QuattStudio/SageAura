@@ -26,7 +26,8 @@
 
 
 
-#define SA_Normalize_I(val, max)     ((val)/(max))
+
+#define SA_Normalize_I(val, max) ((val) / (float)(max))
 
 
 
