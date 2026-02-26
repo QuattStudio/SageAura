@@ -13,8 +13,8 @@
 
 
 
-#include "sa_core.h"
-#include "sa_types.h"
+#include "core/sa_core.h"
+#include "core/sa_types.h"
 
 #include "sa_platforms.h"
 
@@ -49,7 +49,7 @@ typedef struct SA_Texture {
 
 
 extern SA_Texture* SA_WhiteTexture;   // global white texture for colored draws
-
+extern int uModelLoc;
 
 
 

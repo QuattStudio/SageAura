@@ -13,7 +13,7 @@
 
 #include "sa_common.h"
 #include "sa_colorl.h"
-
+#include "sa_math.h"
 
 
 SA_Texture* SA_LoadTexture(const char* filepath)
@@ -23,7 +23,7 @@ SA_Texture* SA_LoadTexture(const char* filepath)
 
     unsigned char* data = stbi_load(filepath, &w, &h, &channels, 4); // force RGBA
     if (!data) {
-        SA_LOG_ERROR("Failed to load image: %s", filepath);
+        SA_LOG_WARN("Failed to load image: %s", filepath);
         return NULL;
     }
 
@@ -72,6 +72,7 @@ void SA_DrawTexture(SA_Texture* tex, int x, int y, int w, int h)
     v0 = 0.0f;
     u1 = 1.0f;
     v1 = 1.0f;
+    
 
     /*
         we normallizing because ...
@@ -103,7 +104,11 @@ void SA_DrawTexture(SA_Texture* tex, int x, int y, int w, int h)
 
 
 
-void SA_UnLoadTexture(SA_Texture* texture)
+
+
+
+
+void SA_UnloadTexture(SA_Texture* texture)
 {
     if (SA_NOT texture) return;
     free(texture);

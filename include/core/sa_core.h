@@ -61,6 +61,30 @@ typedef struct SA_Vertex {
 
 
 
+typedef struct SA_Timer {
+    struct {
+        SA_Uint32 start;
+        SA_Uint32 last;
+        SA_Uint32 current;
+        float delta;
+    } time;
+} SA_Timer;
+
+
+
+SA_API SA_Uint32 SA_GetTicks(void);
+
+SA_API SA_Timer* SA_StartTimer(void);
+
+SA_API void SA_StopTimer(SA_Timer* timer);
+SA_API float SA_GetDeltaFromTimer(SA_Timer *timer);
+
+SA_API float SA_GetElapsed(SA_Timer* timer);
+
+
+
+
+
 
 
 
@@ -78,11 +102,14 @@ typedef enum {
 
 
 
+#define SA_FLAG_MAXIMIZED   SA_FLAG_WINDOW_MAXIMIZED
+#define SA_FLAG_BORDERLESS  SA_FLAG_WINDOW_BORDERLESS
+#define SA_FLAG_RESIZABLE   SA_FLAG_WINDOW_RESIZABLE
 
 
-
-
-
+#define SA_MAXIMIZED        SA_FLAG_MAXIMIZED
+#define SA_BORDERLESS       SA_FLAG_BORDERLESS
+#define SA_RESIZABLE        SA_FLAG_RESIZABLE
 
 
 // exceptions types
@@ -101,3 +128,4 @@ typedef enum {
 // exceptions msg
 
 #define SA_MSG_WINDOW_NOT_FOUND_I    "SageAura Window not found!"
+#define SA_MSG_GLFW_WINDOW_NOT_FOUND_I    "GLFW Window not found!"

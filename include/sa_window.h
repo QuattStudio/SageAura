@@ -16,12 +16,12 @@
 
 
 
-#include "sa_types.h"
+#include "core/sa_types.h"
 
 #include "sa_platforms.h"
-#include "sa_common.h"
+#include "core/sa_common.h"
 
-#include "sa_core.h"
+#include "core/sa_core.h"
 
 
 
@@ -74,7 +74,13 @@ SA_API
 void SA_SetTargetFPS(int fps);
 
 
+SA_API 
+float SA_GetDeltaTime();
 
+
+
+SA_API
+void SA_EnableFullScreen();
 
 
 

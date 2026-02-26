@@ -107,9 +107,96 @@ void SA_DestroyMesh_I(SA_Mesh* mesh)
 
 
 
+#ifdef _WIN32
+
+SA_Uint32 SA_GetTicks(void)
+{
+    return GetTickCount();
+}
+
+#else
+#include <time.h>
+
+SA_Uint32 SA_GetTicks(void)
+{
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+
+    return (ts.tv_sec * 1000) + (ts.tv_nsec / 1000000);
+}
+
+#endif
 
 
 
+
+
+SA_Timer* SA_StartTimer(void)
+{
+    SA_Timer* timer = SA_MALLOC(SA_Timer);
+    
+    if (SA_NOT timer) {
+        SA_LOG_WARN("Timer memory allocation failed!");
+        return NULL;
+    }
+
+    SA_Uint32 now = SA_GetTicks();
+    timer->time.start = now;
+    timer->time.last = now;
+    timer->time.current = now;
+    timer->time.delta = 0.0f;
+
+    return timer;
+}
+
+
+
+
+
+
+
+
+
+
+float SA_GetDeltaFromTimer(SA_Timer *timer)
+{
+    if (SA_NOT timer) {
+        SA_LOG_WARN("Timer not found!");
+        return 0;
+    }
+
+    timer->time.current = SA_GetTicks();
+    timer->time.delta = (timer->time.current - timer->time.last) / 1000.0f;
+    timer->time.last = timer->time.current;
+    if (timer->time.delta > 0.05f)  timer->time.delta = 0.05f;
+
+    return timer->time.delta;
+}
+
+
+
+void SA_StopTimer(SA_Timer* timer)
+{
+    if (SA_NOT timer) {
+        SA_LOG_INFO("Timer stop successfully!");
+        return;
+    }
+
+    free(timer);
+    timer = NULL;
+}
+
+
+
+
+float SA_GetElapsed(SA_Timer* timer)
+{
+    if (SA_NOT timer) {
+        SA_LOG_WARN("No timer provided in elapsed function!");
+        return 0.0f;
+    }
+    return (SA_GetTicks() - timer->time.start) / 1000.0f;
+}
 
 
 
@@ -127,7 +214,7 @@ void SA_ApplyGLFWWindowHint_I(SA_Uint flags)
 
     if (flags & SA_FLAG_WINDOW_MAXIMIZED) {
         SA_LOG_INFO("Flag type [window maximized] setted on window!");
-        glfwWindowHint(GLFW_MAXIMIZED, SA_NO);
+        glfwWindowHint(GLFW_MAXIMIZED, SA_YES);
     }
 
     if (flags & SA_FLAG_WINDOW_FULLSCREEN) {

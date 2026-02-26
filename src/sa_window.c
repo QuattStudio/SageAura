@@ -47,6 +47,7 @@ SA_Window *SA_WindowInst_I = NULL;
 int SA_IsControlFlagEnabled_I = 0;
 
 
+static int SA_WindowInitFlags_I = 0;
 
 
 
@@ -81,6 +82,8 @@ int SA_Start(int flags)
 
     SA_LOGV_INFO("GLFW Initialization completed!");
 
+    SA_WindowInitFlags_I = flags;
+
     
     /* Setup Gl version */
     GLH_UseGL330Version();
@@ -99,6 +102,8 @@ int SA_Start(int flags)
 /* Create Window */
 int SA_OpenWindow(int width, int height, const char* title)
 {
+    SA_ApplyGLFWWindowHint_I(SA_WindowInitFlags_I);
+    // glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
     // Create GLFW Window
     GLFWwindow* GLFW_Window = glfwCreateWindow(width, height, title, NULL, NULL);
     if (SA_NOT GLFW_Window)
@@ -139,6 +144,8 @@ int SA_OpenWindow(int width, int height, const char* title)
     window->color.r = 0.13f;
     window->color.g = 0.13f;
     window->color.b = 0.13f;
+
+    window->timer = SA_StartTimer();
 
     SA_SetWindowEventCallBacks_I(window);
 
@@ -188,9 +195,12 @@ void SA_CloseWindow(void)
 
     SA_LOGV_INFO("GLFW window Destroyed!");
 
+    SA_StopTimer(SA_WindowInst_I->timer);
 
     free(SA_WindowInst_I);
     SA_WindowInst_I = NULL;
+
+    SA_WindowInitFlags_I = 0;
 
     // clear the default font
 
@@ -279,3 +289,59 @@ void SA_SetTargetFPS(int fps)
     
     SA_WindowInst_I->fps = fps;
 }
+
+
+
+
+
+
+float SA_GetDeltaTime()
+{
+    SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, 0.0f);
+
+    return SA_GetDeltaFromTimer(SA_WindowInst_I->timer);
+}
+
+
+
+
+
+
+void SA_EnableFullScreen()
+{
+
+    SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
+    SA_CHECK_WINDOW_I(SA_WindowInst_I->handle, SA_MSG_GLFW_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
+
+
+    static int fullscreen = 0;
+    static int wx, wy, ww, wh;
+
+    fullscreen = !fullscreen;
+
+    if (fullscreen)
+    {
+        glfwGetWindowPos(SA_WindowInst_I->handle, &wx, &wy);
+        glfwGetWindowSize(SA_WindowInst_I->handle, &ww, &wh);
+
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+
+        glfwSetWindowMonitor(SA_WindowInst_I->handle, monitor,
+                             0, 0,
+                             mode->width, mode->height,
+                             mode->refreshRate);
+    }
+    else
+    {
+        glfwSetWindowMonitor(SA_WindowInst_I->handle, NULL,
+                             wx, wy,
+                             ww, wh,
+                             0);
+    }
+}
+
+
+
+
+// 3179

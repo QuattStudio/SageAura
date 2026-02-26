@@ -12,17 +12,17 @@
 #pragma once
 
 
-#include "sa_colorl.h"
+#include "core/sa_colorl.h"
 
-#include "sa_types.h"
-#include "sa_common.h"
+#include "core/sa_types.h"
+#include "core/sa_common.h"
 
 #include "sa_window.h"
-#include "sa_renderer.h"
+#include "renderer/sa_renderer.h"
 #include "sa_event.h"
 
 #include "sa_text.h"
 #include "sa_image.h"
 #include "sa_audio.h"
 
-#include "sa_math.h"
+#include "core/sa_math.h"

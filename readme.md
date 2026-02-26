@@ -32,7 +32,10 @@ A lightweight game engine written in C with OpenGL 3.3 Core Profile.
 - Audio system added
 - some more function added for game to control FPS and Background color
 
-
+## v0.5.2
+- some more math functions added
+- timer added
+- many algorithm added
 
 ## Building
 (coming soon)

@@ -23,7 +23,8 @@
 
 
 #include "sa_inc.h"
-#include "sa_core_.h"
+#include "internals/sa_core_.h"
+#include "core/sa_core.h"
 
 
 struct SA_Window {
@@ -39,6 +40,8 @@ struct SA_Window {
     struct {
         float r, g, b;
     } color;
+
+    SA_Timer* timer;
 
     int fps;
 };

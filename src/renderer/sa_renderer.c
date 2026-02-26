@@ -45,6 +45,7 @@ SA_Uint sa_index_I[SA_MAX_INDICES];
 
 static SA_Uint ShaderProgram;
 SA_Mesh* GlobalMesh = NULL;
+int uModelLoc;
 
 
 // add near existing globals
@@ -148,6 +149,7 @@ int SA_InitRenderer_I(void)
 
     glUseProgram(ShaderProgram);
     GLint loc = glGetUniformLocation(ShaderProgram, "uTexture");
+
     if (loc >= 0) {
         glUniform1i(loc, 0); // texture unit 0
     }
