@@ -26,3 +26,39 @@
 #include "sa_audio.h"
 
 #include "core/sa_math.h"
+
+
+
+
+
+
+#define SA_MAIN()       int main(int argc, char **argv)
+
+
+
+
+
+
+
+
+
+#ifdef SA_IMPORT_ALL
+
+
+
+#define Start(flags)    SA_Start(flags)
+#define OpenWindow(width, height, title)    SA_OpenWindow(width, height, title)
+#define Play()      SA_Play()
+
+#define BeginDrawing()      SA_BeginDrawing()
+#define EndDrawing()        SA_EndDrawing()
+
+#define CloseWindow()       SA_CloseWindow()
+
+
+
+#define LoadTexture(file)       SA_LoadTexture(file)
+
+
+
+#endif

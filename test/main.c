@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "sa.h"
 
 
@@ -52,7 +53,8 @@ int main(int argc, char **argv)
         
         SA_BeginDrawing();
 
-        SA_DrawTexture(tex, rect.x, rect.y, rect.width, rect.height);
+
+        SA_DrawTexture(tex, &rect);
 
 
         SA_EndDrawing();

@@ -54,7 +54,7 @@ SA_Texture* SA_LoadTexture(const char* filepath)
 
 
 // u0,v0 = top-left texcoord, u1,v1 = bottom-right texcoord
-void SA_DrawTexture(SA_Texture* tex, int x, int y, int w, int h)
+void SA_DrawTexture(SA_Texture* tex, SA_Rect* rect)
 {
     // if texture changed -> flush batch
     SA_Uint texId = tex ? tex->id : (SA_WhiteTexture ? SA_WhiteTexture->id : 0);
@@ -88,10 +88,10 @@ void SA_DrawTexture(SA_Texture* tex, int x, int y, int w, int h)
     fcolor = SA_NormalizeColorEx(SA_COLOR_WHITE);
 
     // Note: choose vertex ordering consistent with your coordinate system
-    SA_PushVertexUV((float)x,     (float)y,      fcolor, u0, v0); // top-left
-    SA_PushVertexUV((float)x + w, (float)y,      fcolor, u1, v0); // top-right
-    SA_PushVertexUV((float)x,     (float)y + h,  fcolor, u0, v1); // bottom-left
-    SA_PushVertexUV((float)x + w, (float)y + h,  fcolor, u1, v1); // bottom-right
+    SA_PushVertexUV(rect->x, rect->y,                  fcolor, u0, v0); // top-left
+    SA_PushVertexUV(rect->x + rect->width, rect->y,    fcolor, u1, v0); // top-right
+    SA_PushVertexUV(rect->x, rect->y + rect->height,   fcolor, u0, v1); // bottom-left
+    SA_PushVertexUV(rect->x + rect->width, rect->y + rect->height,  fcolor, u1, v1); // bottom-right
 
     SA_PushIndex((SA_Uint)(base + 0));
     SA_PushIndex((SA_Uint)(base + 1));
