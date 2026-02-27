@@ -16,6 +16,7 @@
 #include "sa_.h"
 #include "sa_common.h"
 #include "sa_inc.h"
+// #include "sa_window.h"
 
 
 #define SA_MAX_EVENTS 256
@@ -249,12 +250,23 @@ static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 }
 
 
+
+
+
+static void window_resize_callback(GLFWwindow* window, int width, int height)
+{
+    // if using OpenGL, update viewport too
+    glViewport(0, 0, width, height);
+}
+
+
 void SA_SetWindowEventCallBacks_I(SA_Window* window)
 {
     glfwSetKeyCallback(window->handle, key_callback);
     glfwSetCursorPosCallback(window->handle, cursor_callback);
     glfwSetMouseButtonCallback(window->handle, mouse_button_callback);
     glfwSetScrollCallback(window->handle, scroll_callback);
+    glfwSetWindowSizeCallback(window->handle, window_resize_callback);
 }
 
 

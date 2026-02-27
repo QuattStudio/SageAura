@@ -1,7 +1,7 @@
 # SageAura
 A game engine written in C.
 
-> ⚠️ Currently in early development (v0.5.3)
+> ⚠️ Currently in early development (v0.5.4)
 
 ## Features
 - Simple texture loading
@@ -10,7 +10,7 @@ A game engine written in C.
   1. Direct poll events
   2. Continuous event handling
   3. Poll events with callbacks
-- 24 built-in colors, accessible via:
+  -  many built-in colors, accessible via:
   - `SA_COLOR_RED` style
   - `SA_RED` style
 
@@ -37,6 +37,13 @@ A game engine written in C.
 - timer added
 - many algorithm added
 - some macro added to simplyfy work
+
+
+## v0.5.4
+- some patched bugs
+- some small features
+- 2 more colors added (orange and green)
+
 
 ## Building
 (coming soon)

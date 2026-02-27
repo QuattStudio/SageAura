@@ -19,9 +19,9 @@
 
 
 
-typedef enum SA_STATE_I {
-    SA_WND_STATE_RUN_I,
-} SA_STATE_I;
+// typedef enum SA_STATE_I {
+//     SA_WND_STATE_RUN_I,
+// } SA_STATE_I;
 
 
 

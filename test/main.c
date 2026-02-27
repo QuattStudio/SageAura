@@ -54,7 +54,10 @@ int main(int argc, char **argv)
         SA_BeginDrawing();
 
 
-        SA_DrawTexture(tex, &rect);
+        // SA_DrawTexture(tex, &rect);
+        SA_DrawTextureEx(tex, &rect, SA_BABY_BLUE);
+        SA_DrawRectLines(&rect, SA_RED);
+        // SA_DrawRect(&rect, SA_RED);
 
 
         SA_EndDrawing();

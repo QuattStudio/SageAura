@@ -81,7 +81,11 @@ void SA_DrawTriangle(
 
 
 SA_API
-void SA_DrawRect(int x, int y, int w, int h, SA_Colori color);
+void SA_DrawRect(SA_Rect* rect, SA_Colori color);
+
+
+SA_API
+void SA_DrawRecti(SA_Recti* rect, SA_Colori color);
 
 
 
@@ -107,3 +111,7 @@ void SA_DrawPoint(int x, int y, SA_Colori color);
 
 SA_API
 void SA_DrawLine(int x0, int y0, int x1, int y1, SA_Colori color);
+
+
+SA_API
+void SA_DrawRectLines(SA_Rect* rect, SA_Colori color);

@@ -108,6 +108,55 @@ void SA_DrawTexture(SA_Texture* tex, SA_Rect* rect)
 
 
 
+
+
+
+
+
+
+void SA_DrawTextureEx(SA_Texture* tex, SA_Rect* rect, SA_Colori color)
+{
+        // if texture changed -> flush batch
+    SA_Uint texId = tex ? tex->id : (SA_WhiteTexture ? SA_WhiteTexture->id : 0);
+    if (texId != CurrentBoundTexture) {
+        SA_FlushBatch();
+        GlobalMesh->VertexCount = 0;
+        GlobalMesh->IndexCount = 0;
+        CurrentBoundTexture = texId;
+    }
+
+    size_t base = GlobalMesh->VertexCount;
+
+    float u0, v0, u1, v1;
+    u0 = 0.0f;
+    v0 = 0.0f;
+    u1 = 1.0f;
+    v1 = 1.0f;
+    
+
+
+    SA_Color fcolor;
+    fcolor = SA_NormalizeColorEx(color);
+
+    // Note: choose vertex ordering consistent with your coordinate system
+    SA_PushVertexUV(rect->x, rect->y,                  fcolor, u0, v0); // top-left
+    SA_PushVertexUV(rect->x + rect->width, rect->y,    fcolor, u1, v0); // top-right
+    SA_PushVertexUV(rect->x, rect->y + rect->height,   fcolor, u0, v1); // bottom-left
+    SA_PushVertexUV(rect->x + rect->width, rect->y + rect->height,  fcolor, u1, v1); // bottom-right
+
+    SA_PushIndex((SA_Uint)(base + 0));
+    SA_PushIndex((SA_Uint)(base + 1));
+    SA_PushIndex((SA_Uint)(base + 2));
+
+    SA_PushIndex((SA_Uint)(base + 1));
+    SA_PushIndex((SA_Uint)(base + 3));
+    SA_PushIndex((SA_Uint)(base + 2));
+}
+
+
+
+
+
 void SA_UnloadTexture(SA_Texture* texture)
 {
     if (SA_NOT texture) return;

@@ -31,9 +31,26 @@
 typedef struct SA_Window SA_Window;
 
 
+typedef struct sa_Globals_window {
+    // the main first size of window
+    int main_width;
+    int main_height;
+
+    int main_width_half;
+    int main_height_half;
+
+    // the size of window but change when we resize
+    int width;
+    int height;
+
+    int width_half;
+    int height_half;
+
+} sa_Globals_window;
+
 
 extern int SA_IsControlFlagEnabled_I;
-
+extern sa_Globals_window SA_window;
 
 
 

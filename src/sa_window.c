@@ -42,6 +42,7 @@ SA_Window *SA_WindowInst_I = NULL;
 
 
 
+
 /* internal flags */
 
 int SA_IsControlFlagEnabled_I = 0;
@@ -136,7 +137,7 @@ int SA_OpenWindow(int width, int height, const char* title)
     window->flags = 0;
     window->width = width;
     window->height = height;
-    window->state = SA_WND_STATE_RUN_I;
+    // window->state = SA_WND_STATE_RUN_I;
 
     window->fps = 60;
 
@@ -146,6 +147,10 @@ int SA_OpenWindow(int width, int height, const char* title)
     window->color.b = 0.13f;
 
     window->timer = SA_StartTimer();
+
+
+    // global window info filling
+
 
     SA_SetWindowEventCallBacks_I(window);
 

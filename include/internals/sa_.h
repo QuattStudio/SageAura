@@ -34,7 +34,7 @@ struct SA_Window {
     GLFWwindow* handle;
 
     int flags;
-    SA_STATE_I state;
+    // SA_STATE_I state;
 
 
     struct {

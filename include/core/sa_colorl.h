@@ -65,6 +65,7 @@ SA_Colori SA_ColorFromHex(const char *hex)
 #define SA_COLOR_BLUE               SA_RGB(0, 0, 255)
 #define SA_COLOR_WHITE              SA_RGB(255, 255, 255)
 #define SA_COLOR_BLACK              SA_RGB(0, 0, 0)
+#define SA_COLOR_GREEN              SA_RGB(0, 128, 0)
 
 // sage colors
 
@@ -87,6 +88,7 @@ SA_Colori SA_ColorFromHex(const char *hex)
 
 #define SA_COLOR_LIME               SA_RGB(0, 255, 0)
 
+#define SA_COLOR_ORANGE             SA_RGB(255, 165, 0, 255)
 #define SA_COLOR_SLATE_DARK         SA_RGB(44, 62, 80)
 #define SA_COLOR_CANDY_APPLE_RED    SA_RGB(255, 8, 0)
 #define SA_COLOR_ELECTRIC_BLUE      SA_RGB(125, 249, 255)
@@ -148,6 +150,8 @@ SA_Colori SA_ColorFromHex(const char *hex)
 #define SA_BLUE                     SA_COLOR_BLUE
 #define SA_WHITE                    SA_COLOR_WHITE
 #define SA_BLACK                    SA_COLOR_BLACK
+#define SA_GREEN                    SA_COLOR_GREEN
+#define SA_ORANGE                   SA_COLOR_ORANGE
 
 #define SA_GRAY                     SA_COLOR_GRAY
 #define SA_GREY                     SA_COLOR_GREY // both are same just english difference use whatever you want

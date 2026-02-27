@@ -279,7 +279,7 @@ void SA_DrawTriangle(
 
 
 
-void SA_DrawRect(int x, int y, int w, int h, SA_Colori color)
+void SA_DrawRect(SA_Rect* rect, SA_Colori color)
 {
     SA_Uint whiteId = SA_WhiteTexture ? SA_WhiteTexture->id : 0;
     if (CurrentBoundTexture != whiteId) {
@@ -294,10 +294,10 @@ void SA_DrawRect(int x, int y, int w, int h, SA_Colori color)
     fcolor = SA_NormalizeColorEx(color);
 
     // Push 4 vertices (counter-clockwise order)
-    SA_PushVertex((float)x,     (float)y,     fcolor);   // 0 top-left
-    SA_PushVertex((float)x + w, (float)y,     fcolor);   // 1 top-right
-    SA_PushVertex((float)x,     (float)y + h, fcolor);   // 2 bottom-left
-    SA_PushVertex((float)x + w, (float)y + h, fcolor);   // 3 bottom-right
+    SA_PushVertex(rect->x,     rect->y,     fcolor);   // 0 top-left
+    SA_PushVertex(rect->x + rect->width, rect->y,     fcolor);   // 1 top-right
+    SA_PushVertex(rect->x,     rect->y + rect->height, fcolor);   // 2 bottom-left
+    SA_PushVertex(rect->x + rect->width, rect->y + rect->height, fcolor);   // 3 bottom-right
 
     // Push 6 indices (two triangles)
     SA_PushIndex(base + 0);
@@ -308,6 +308,41 @@ void SA_DrawRect(int x, int y, int w, int h, SA_Colori color)
     SA_PushIndex(base + 3);
     SA_PushIndex(base + 2);
 }
+
+
+
+
+
+void SA_DrawRecti(SA_Recti* rect, SA_Colori color)
+{
+    SA_Uint whiteId = SA_WhiteTexture ? SA_WhiteTexture->id : 0;
+    if (CurrentBoundTexture != whiteId) {
+        SA_FlushBatch();
+        SA_MeshCounterReset_I(GlobalMesh);
+        CurrentBoundTexture = whiteId;
+    }
+
+    size_t base = GlobalMesh->VertexCount;   // starting index for this rect
+
+    SA_Color fcolor;
+    fcolor = SA_NormalizeColorEx(color);
+
+    // Push 4 vertices (counter-clockwise order)
+    SA_PushVertex((float)rect->x,  (float)rect->y,     fcolor);   // 0 top-left
+    SA_PushVertex((float)rect->x + (float)rect->width, (float)rect->y,     fcolor);   // 1 top-right
+    SA_PushVertex((float)rect->x,  (float)rect->y + rect->height, fcolor);   // 2 bottom-left
+    SA_PushVertex((float)rect->x + (float)rect->width, (float)rect->y + (float)rect->height, fcolor);   // 3 bottom-right
+
+    // Push 6 indices (two triangles)
+    SA_PushIndex(base + 0);
+    SA_PushIndex(base + 1);
+    SA_PushIndex(base + 2);
+
+    SA_PushIndex(base + 1);
+    SA_PushIndex(base + 3);
+    SA_PushIndex(base + 2);
+}
+
 
 
 
@@ -405,8 +440,8 @@ void SA_DrawLine(int x0, int y0, int x1, int y1, SA_Colori color) {
     float ny = dy / len;
 
     // Perpendicular offset, half thickness = 1.0 px
-    float px = -ny * 1.0f;
-    float py =  nx * 1.0f;
+    float px = -ny * 1.5f;
+    float py =  nx * 1.5f;
 
     // Four corners with rounded offset
     int xA = x0 + (int)( px + 0.5f);
@@ -426,7 +461,12 @@ void SA_DrawLine(int x0, int y0, int x1, int y1, SA_Colori color) {
 
 
 
-
+void SA_DrawRectLines(SA_Rect* rect, SA_Colori color) {
+    SA_DrawLine(rect->x, rect->y, rect->x + rect->width, rect->y, color);          // top
+    SA_DrawLine(rect->x + rect->width, rect->y, rect->x + rect->width, rect->y + rect->height, color); // right
+    SA_DrawLine(rect->x, rect->y + rect->height, rect->x + rect->width, rect->y + rect->height, color); // bottom
+    SA_DrawLine(rect->x, rect->y, rect->x, rect->y + rect->height, color); // left
+}
 
 
 
