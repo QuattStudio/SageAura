@@ -14,6 +14,7 @@
 
 
 #include <stdint.h>
+#include "sa_image.h"
 
 
 /* SageAura int & uint types */
@@ -204,3 +205,50 @@ typedef struct SA_Body2D
     float mass;            ///< mass affecting physics response
     int grounded;          ///< non-zero if touching ground
 } SA_Body2D;
+
+
+
+
+
+
+
+
+
+
+typedef struct SA_Position {
+    float x;
+    float y;
+} SA_Position;
+
+
+typedef struct SA_Velocity {
+    float x;
+    float y;
+} SA_Velocity;
+
+
+
+typedef struct SA_Size {
+    float width;
+    float height;
+} SA_Size;
+
+
+
+
+typedef struct SA_Sizei {
+    int width;
+    int height;
+} SA_Sizei;
+
+
+
+
+
+
+
+typedef struct SA_Sprite {
+    SA_Texture* texture;
+    SA_Colori color;
+    SA_Rect rect;
+} SA_Sprite;

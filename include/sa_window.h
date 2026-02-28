@@ -24,11 +24,12 @@
 #include "core/sa_core.h"
 
 
-
 /**
  * 
  */
 typedef struct SA_Window SA_Window;
+// typedef void (*SA_EventCallback)(SA_Window* window, const SA_Event* event);
+
 
 
 typedef struct sa_Globals_window {

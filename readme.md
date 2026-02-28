@@ -1,7 +1,7 @@
 # SageAura
 A game engine written in C.
 
-> ⚠️ Currently in early development (v0.5.4)
+> ⚠️ Currently in early development (v0.6.0)
 
 ## Features
 - Simple texture loading
@@ -43,6 +43,10 @@ A game engine written in C.
 - some patched bugs
 - some small features
 - 2 more colors added (orange and green)
+
+## v0.6.0
+- Entity system added
+
 
 
 ## Building

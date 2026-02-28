@@ -1,13 +1,13 @@
 #pragma once
 
-#include "core/sa_types.h"
 #include "sa_platforms.h"
 
 
 
 
 typedef struct SA_Texture SA_Texture;
-
+typedef struct SA_Rect SA_Rect;
+typedef struct SA_Colori SA_Colori;
 
 
 // #include "glh.h"

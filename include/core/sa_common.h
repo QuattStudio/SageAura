@@ -83,7 +83,8 @@
 #define SA_XOR  ^
 #define SA_AND  &&
 
-
+#define SA_THEN  ?
+#define SA_ELSE  :
 
 
 

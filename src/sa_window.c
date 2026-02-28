@@ -14,8 +14,9 @@
 #include "sa_core.h"
 #include "sa_text.h"
 
-#include "sa_renderer.h"
 #include "sa_event.h"
+
+#include "sa_renderer.h"
 #include "sa_audio.h"
 #include "sa_inc.h"
 
@@ -178,6 +179,7 @@ int SA_Play(void)
 
     glfwPollEvents();
     SA_UpdateInput();
+    // SA_HandleEvents(callback);
 
     return SA_NOT glfwWindowShouldClose(SA_WindowInst_I->handle);
 }
@@ -349,4 +351,4 @@ void SA_EnableFullScreen()
 
 
 
-// 3179
+// 3179 LOC total in something v5.0.1 - v5.0.2

@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     */
     SA_SetBackgroundColor(SA_BABY_BLUE); // default dark greyish type
 
-    SA_SetTargetFPS(60); // but don't worry to write this, 60 FPS was by default
+    // SA_SetTargetFPS(60); // but don't worry to write this, 60 FPS was by default
 
     while (SA_Play())
     {

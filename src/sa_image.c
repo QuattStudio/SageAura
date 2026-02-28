@@ -14,6 +14,8 @@
 #include "sa_common.h"
 #include "sa_colorl.h"
 #include "sa_math.h"
+#include "core/sa_types.h"
+
 
 
 SA_Texture* SA_LoadTexture(const char* filepath)

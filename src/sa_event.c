@@ -291,14 +291,29 @@ void SA_SetWindowEventCallBacks_I(SA_Window* window)
 
 
 
+// void SA_HandleEvents(SA_EventCallback callback)
+// {
+//     SA_Event event;
+//     if (SA_NOT SA_WindowInst_I) return;
+    
+//     if (callback != NULL) {
+//         while (SA_PollEvent(&event))
+//             callback(SA_WindowInst_I, &event);
+//     }
+// }
+
+
+
 void SA_HandleEvents(SA_EventCallback callback)
 {
     SA_Event event;
     if (SA_NOT SA_WindowInst_I) return;
     
-    if (callback != NULL) {
-        while (SA_PollEvent(&event))
+    SA_UpdateInput();  // Reset "this frame only" flags at the start of each frame
+    
+    while (SA_PollEvent(&event)) {
+        if (callback != NULL) {
             callback(SA_WindowInst_I, &event);
+        }
     }
 }
-
