@@ -23,15 +23,15 @@
 
 
 #include "sa_inc.h"
-#include "internals/sa_core_.h"
 #include "core/sa_core.h"
-
+#include "core/sa_types.h"
 
 struct SA_Window {
     int width;
     int height;
 
     GLFWwindow* handle;
+    SA_EventCallback callback;
 
     int flags;
     // SA_STATE_I state;

@@ -138,7 +138,7 @@ int SA_OpenWindow(int width, int height, const char* title)
     window->flags = 0;
     window->width = width;
     window->height = height;
-    // window->state = SA_WND_STATE_RUN_I;
+
 
     window->fps = 60;
 
@@ -149,11 +149,13 @@ int SA_OpenWindow(int width, int height, const char* title)
 
     window->timer = SA_StartTimer();
 
+    window->callback = NULL;
+
 
     // global window info filling
 
 
-    SA_SetWindowEventCallBacks_I(window);
+    SA_SetWindowEventCallBacks_I(window->handle);
 
 
     // register window internally
@@ -170,7 +172,7 @@ int SA_OpenWindow(int width, int height, const char* title)
 
 
 
-int SA_Play(void)
+int SA_Play()
 {
 
     // don't play if window not found
@@ -179,13 +181,22 @@ int SA_Play(void)
 
     glfwPollEvents();
     SA_UpdateInput();
-    // SA_HandleEvents(callback);
+
+    // needed for run any type of event handling, can be NULL but important to call for event handling
+    SA_HandleEvents(SA_WindowInst_I->callback);
 
     return SA_NOT glfwWindowShouldClose(SA_WindowInst_I->handle);
 }
 
 
 
+
+void SA_SetEventTo(SA_EventCallback callback)
+{
+    SA_CHECK_WINDOW_I(SA_WindowInst_I, SA_MSG_WINDOW_NOT_FOUND_I, SA_RET_TYPE_NONE_I);
+    
+    SA_WindowInst_I->callback = callback;
+}
 
 
 

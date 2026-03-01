@@ -1,7 +1,7 @@
 # SageAura
 A game engine written in C.
 
-> ⚠️ Currently in early development (v0.6.0)
+> ⚠️ Currently in early development (v0.7.1)
 
 ## Features
 - Simple texture loading
@@ -13,6 +13,20 @@ A game engine written in C.
   -  many built-in colors, accessible via:
   - `SA_COLOR_RED` style
   - `SA_RED` style
+  4. Entity system
+  5. many shapes rendering
+  6. audio system
+  7. text & image rendering system
+  8. inbuilt math lib
+
+
+
+
+> ⚠️ **Notice:** SageAura is reaching end of life. Active development will be discontinued soon.
+> A full remake is in progress — **VioletSage** — rebuilt from the ground up with a new backend.
+> You can wait for VioletSage or continue using SageAura as is.
+
+
 
 ## Changelog
 ### v0.1.0
@@ -47,6 +61,10 @@ A game engine written in C.
 ## v0.6.0
 - Entity system added
 
+
+## v0.7.1
+- Entity system improved
+- event handling system changed a bit to increase redability.
 
 
 ## Building

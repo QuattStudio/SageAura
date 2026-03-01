@@ -54,8 +54,10 @@ typedef int64_t     SA_Int64;
 
 
 
+typedef struct SA_Window SA_Window;
+typedef struct SA_Event SA_Event;
 
-
+typedef void (*SA_EventCallback)(SA_Window* window, const SA_Event* event);
 
 
 

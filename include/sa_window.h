@@ -72,8 +72,10 @@ void SA_CloseWindow(void);
 
 
 SA_API
-int SA_Play(void);
+int SA_Play();
 
+SA_API
+void SA_SetEventTo(SA_EventCallback callback);
 
 
 SA_API

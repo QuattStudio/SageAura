@@ -16,7 +16,6 @@
 #include "sa_.h"
 #include "sa_common.h"
 #include "sa_inc.h"
-// #include "sa_window.h"
 
 
 #define SA_MAX_EVENTS 256
@@ -260,13 +259,13 @@ static void window_resize_callback(GLFWwindow* window, int width, int height)
 }
 
 
-void SA_SetWindowEventCallBacks_I(SA_Window* window)
+void SA_SetWindowEventCallBacks_I(GLFWwindow* window)
 {
-    glfwSetKeyCallback(window->handle, key_callback);
-    glfwSetCursorPosCallback(window->handle, cursor_callback);
-    glfwSetMouseButtonCallback(window->handle, mouse_button_callback);
-    glfwSetScrollCallback(window->handle, scroll_callback);
-    glfwSetWindowSizeCallback(window->handle, window_resize_callback);
+    glfwSetKeyCallback(window,          key_callback);
+    glfwSetCursorPosCallback(window,    cursor_callback);
+    glfwSetMouseButtonCallback(window,  mouse_button_callback);
+    glfwSetScrollCallback(window,       scroll_callback);
+    glfwSetWindowSizeCallback(window,   window_resize_callback);
 }
 
 
@@ -289,18 +288,6 @@ void SA_SetWindowEventCallBacks_I(SA_Window* window)
 // USER EVENT CALLBACK (completely new code)
 // ================================================================
 
-
-
-// void SA_HandleEvents(SA_EventCallback callback)
-// {
-//     SA_Event event;
-//     if (SA_NOT SA_WindowInst_I) return;
-    
-//     if (callback != NULL) {
-//         while (SA_PollEvent(&event))
-//             callback(SA_WindowInst_I, &event);
-//     }
-// }
 
 
 

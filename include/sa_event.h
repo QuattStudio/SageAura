@@ -14,7 +14,6 @@
 
 
 #include "core/sa_types.h"
-#include "sa_window.h"
 
 
 #include "sa_platforms.h"
@@ -238,7 +237,9 @@ typedef struct SA_Event
 
 
 
-
+/* window type declarations */
+typedef struct SA_Window SA_Window;
+typedef struct GLFWwindow GLFWwindow;
 
 
 
@@ -252,7 +253,7 @@ int SA_PollEvent(SA_Event* out);
 
 
 
-void SA_SetWindowEventCallBacks_I(SA_Window* window);
+void SA_SetWindowEventCallBacks_I(GLFWwindow* window);
 
 
 
@@ -297,6 +298,5 @@ SA_API double SA_GetMouseWheel(void);        // last scroll delta this frame
 
 
 
-typedef void (*SA_EventCallback)(SA_Window* window, const SA_Event* event);
 
 SA_API void SA_HandleEvents(SA_EventCallback callback);

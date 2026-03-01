@@ -33,7 +33,7 @@
 
 
 #define SA_MAIN()       int main(int argc, char **argv)
-
+#define SA_MULTIPLE_ARGS        int argc, char **argv
 
 
 

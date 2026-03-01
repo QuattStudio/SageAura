@@ -15,12 +15,12 @@ if not exist SageAura.dll (
 
 REM compile game
 gcc -mconsole ^
-    test\main.c ^
+    test\test.c ^
     -Iinclude ^
     -L. ^
     -lmingw32 ^
     -lSageAura ^
-    -o test_game.exe
+    -o game.exe
 
 if %errorlevel% neq 0 (
     echo.
@@ -34,6 +34,6 @@ echo Build Success
 echo Running...
 echo.
 
-test_game.exe
+game.exe
 
 REM pause

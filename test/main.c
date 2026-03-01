@@ -51,12 +51,12 @@ int main(int argc, char **argv)
 
     float speed = 180.0f;
 
+    SA_SetEventTo(MyEventHandler);
+
     // SA_Event event;
     while (SA_Play())
     {
         // needed for run any type of event handling, can be NULL but important to call for event handling
-        SA_HandleEvents(MyEventHandler);    
-
 
         float DeltaTime = SA_GetDeltaTime();
 
