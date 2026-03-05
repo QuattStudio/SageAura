@@ -49,7 +49,7 @@ SA_Window *SA_WindowInst_I = NULL;
 int SA_IsControlFlagEnabled_I = 0;
 
 
-static int SA_WindowInitFlags_I = 0;
+static int SA_WindowInitFlags_I;
 
 
 
@@ -64,7 +64,6 @@ static int SA_WindowInitFlags_I = 0;
 
 
 /* Functions uses! */
-
 int SA_Start(int flags)
 {
     if (flags & SA_FLAG_ENABLE_CONTROL)
@@ -105,7 +104,7 @@ int SA_Start(int flags)
 int SA_OpenWindow(int width, int height, const char* title)
 {
     SA_ApplyGLFWWindowHint_I(SA_WindowInitFlags_I);
-    // glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+
     // Create GLFW Window
     GLFWwindow* GLFW_Window = glfwCreateWindow(width, height, title, NULL, NULL);
     if (SA_NOT GLFW_Window)

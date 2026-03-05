@@ -31,7 +31,8 @@ void MyEventHandler(SA_Window* window, const SA_Event* e)
 
 int main(SA_MULTIPLE_ARGS)
 {
-    SA_Start(SA_RESIZABLE);
+    // SA_Start(SA_RESIZABLE);   // resizable is a default behaviour
+    SA_Start(0);
 
     SA_OpenWindow(800, 600, "title");
 

@@ -59,16 +59,42 @@ extern sa_Globals_window SA_window;
 
 
 
-SA_API
-int SA_Start(int flags);
+
+/**
+ * Starts the SageAura game engine
+ * @param flags Takes engine initialization flags
+ * 
+ * @return 1 on success and 0 on failure.
+*/
+SA_API int SA_Start(int flags);
 
 
-SA_API
-int SA_OpenWindow(int width, int height, const char* title);
 
 
-SA_API
-void SA_CloseWindow(void);
+
+
+/**
+ * Opens the window of the game engine.
+ * 
+ * @param width   Width of the window.
+ * @param height  Height of the window.
+ * @param title  Title of the window.
+ * 
+ * @return 1 on success and 0 on failure.
+*/
+SA_API int SA_OpenWindow(int width, int height, const char* title);
+
+
+
+
+
+
+/**
+ * Close the window of the game engine.
+ * 
+ * @return void
+*/
+SA_API void SA_CloseWindow(void);
 
 
 SA_API
