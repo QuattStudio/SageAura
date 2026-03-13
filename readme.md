@@ -25,7 +25,8 @@ A game engine written in C.
 > ⚠️ **Notice:** SageAura is reaching end of life. Active development will be discontinued soon.
 > A full remake is in progress — **VioletSage** — rebuilt from the ground up with a new backend.
 > You can wait for VioletSage or continue using SageAura as is. -->
-
+> **Notice: ** SageAura is completed officially! for better support we soon launch SageAura2
+> A full remake is in progress - ** SageAura2 ** - rebuilt from the ground up.
 
 
 ## Changelog
@@ -81,9 +82,10 @@ A game engine written in C.
 - SA_GetWindowTitle()
 - SA_IsFullScreen()
 
+## v1.0.0
+- Changes Nothing. 😑
 
-## Building
-(coming soon)
+
 
 ## License
 MIT
