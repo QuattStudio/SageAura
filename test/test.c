@@ -32,24 +32,12 @@ void MyEventHandler(SA_Window* window, const SA_Event* e)
 
 int main(SA_MULTIPLE_ARGS)
 {
-    // SA_Start(SA_RESIZABLE);   // resizable is a default behaviour
     SA_Start(0);
 
     SA_OpenWindow(800, 600, "title");
 
     SA_Texture* tex = SA_LoadTexture("test.PNG");
 
-
-    SA_Entity player = SA_SpawnEntity();
-    SA_Vec2 pos = {50.0f, 100.0f};
-    SA_Sizei PlayerSize = {200, 200};
-
-    SA_EntitySetPosition(player, pos.x, pos.y);
-    SA_EntitySetVelocity(player, 0.0f, 0.0f);
-
-    SA_EntityGiveSprite(
-        player, tex, SA_RECT(pos.x, pos.y, PlayerSize.width, PlayerSize.height)
-    );
 
 
     float speed = 180.0f;
@@ -60,13 +48,6 @@ int main(SA_MULTIPLE_ARGS)
     // SA_Event event;
     while (SA_Play())
     {
-        // double MouseX, MouseY;
-        // SA_GetMousePosition(&MouseX, &MouseY);
-        // printf("Mouse: %dx%d\n", MouseX, MouseY);
-        // printf("Mouse: %f %f\n", MouseX, MouseY);
-
-        // SA_Sizei size = SA_GetWindowSize();
-        // printf("Size: %dx%d\n", size.width, size.height);
 
         printf("Is FullScreen?: %d", SA_IsFullScreen());
 
@@ -77,23 +58,12 @@ int main(SA_MULTIPLE_ARGS)
         float vx = 0.0f;
         float vy = 0.0f;
 
-        if (SA_IsKeyDown(SA_KEY_A) || SA_IsKeyDown(SA_KEY_LEFT))  vx = -speed;
-        if (SA_IsKeyDown(SA_KEY_D) || SA_IsKeyDown(SA_KEY_RIGHT)) vx = +speed;
-        if (SA_IsKeyDown(SA_KEY_W) || SA_IsKeyDown(SA_KEY_UP))    vy = -speed;
-        if (SA_IsKeyDown(SA_KEY_S) || SA_IsKeyDown(SA_KEY_DOWN))  vy = +speed;
-        if (SA_IsKeyDown(SA_KEY_F)) SA_EnableFullScreen();
-        if (SA_IsKeyDown(SA_KEY_N)) SA_DisableFullScreen();
-        if (SA_IsKeyDown(SA_KEY_ESCAPE)) SA_StopPlaying();
 
 
-
-        SA_EntitySetVelocity(player, vx, vy);
-        SA_EntitiesUpdate(DeltaTime);
 
 
         SA_BeginDrawing();
 
-        SA_DrawAllSprites();
 
         SA_EndDrawing();
 

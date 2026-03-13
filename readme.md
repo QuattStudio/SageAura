@@ -1,5 +1,5 @@
-# SageAura
-A game engine written in C.
+# Nova
+A modern UI Framework written in C.
 
 > ⚠️ Currently in early development (v0.7.1)
 
@@ -89,6 +89,7 @@ A game engine written in C.
 
 ## License
 MIT
+
 
 
 ## Repository
